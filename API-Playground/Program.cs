@@ -23,16 +23,16 @@ namespace API_Playground
                 app.UseSwaggerUI();
             }
 
-            //app.UseHttpsRedirection();
-
-            //app.UseAuthorization();
-
-
-            //app.MapControllers();
-            app.Run(async (context) =>
+            app.UseHttpsRedirection();
+            app.UseRouting();
+            app.UseAuthorization();
+            app.UseEndpoints(endpoints =>
             {
-                await context.Response.WriteAsync("This is a playground web API!");
+                endpoints.MapControllers();
             });
+
+            
+            
             app.Run();
         }
     }
