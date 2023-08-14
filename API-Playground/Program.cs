@@ -17,19 +17,22 @@ namespace API_Playground
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
+            if (app.Environment.IsProduction())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
-            app.UseAuthorization();
+            //app.UseAuthorization();
 
 
-            app.MapControllers();
-
+            //app.MapControllers();
+            app.Run(async (context) =>
+            {
+                await context.Response.WriteAsync("This is a playground web API!");
+            });
             app.Run();
         }
     }
