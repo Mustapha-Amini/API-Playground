@@ -10,12 +10,16 @@ namespace API_Playground.Controllers
     {
         [HttpGet]
         public JsonResult GetCities()
-        { 
-              return new JsonResult(
-              new List <object> {
-              new { id = 1, Name = "Tehran" },
-              new { id = 2, Name = "Shiraz" }
-               });
+        {
+            return new JsonResult(CitiesDataStore.current.Cities);
+
+        }
+        [HttpGet("{id}")]
+        public JsonResult GetCity(int id) {
+            return new JsonResult(
+                CitiesDataStore.current.Cities.FirstOrDefault(c => c.CitiesDataID == id));
+               
         }
     }
 }
+

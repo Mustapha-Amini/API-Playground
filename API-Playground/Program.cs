@@ -25,7 +25,9 @@ namespace API_Playground
 
             app.UseHttpsRedirection();
             app.UseRouting();
+
             app.UseAuthorization();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
