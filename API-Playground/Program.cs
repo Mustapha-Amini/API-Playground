@@ -1,4 +1,6 @@
 
+using Microsoft.AspNetCore.StaticFiles;
+
 namespace API_Playground
 {
     public class Program
@@ -17,6 +19,7 @@ namespace API_Playground
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddSingleton<FileExtensionContentTypeProvider>();
 
             var app = builder.Build();
 
