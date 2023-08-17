@@ -10,16 +10,16 @@ namespace API_Playground.Controllers
     public class CitiesController : ControllerBase
     {
         [HttpGet]
-        public ActionResult<IEnumerable<CitiesData>> GetCities()
+        public ActionResult<IEnumerable<CityDto>> GetCities()
         {
             return Ok (CitiesDataStore.current.Cities);
 
         }
         [HttpGet("{id}")]
-        public ActionResult<CitiesData> GetCity(int id) {
+        public ActionResult<CityDto> GetCity(int id) {
             
             var CityToReturn =   
-                CitiesDataStore.current.Cities.FirstOrDefault(c => c.CitiesDataID == id);
+                CitiesDataStore.current.Cities.FirstOrDefault(c => c.CityDtoID == id);
 
             if (CityToReturn == null)
             {
