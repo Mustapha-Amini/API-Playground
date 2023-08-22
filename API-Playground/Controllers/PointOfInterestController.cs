@@ -128,6 +128,26 @@ namespace API_Playground.Controllers
 
             return NoContent();
         }
+
+        [HttpDelete("{pointOfInterestId}")]
+        public ActionResult DeletPointOfInterst ( int cityId, int pointofinterestId)
+        {
+            var city = CitiesDataStore.current.Cities.FirstOrDefault(c => c.CityDtoID == cityId);
+            if (city == null)
+            {
+                return NotFound();
+            }
+
+            var pointOfInterestFromStore = city.PointOfInterest
+                .FirstOrDefault(c => c.PointOfInterestDtoID == pointofinterestId);
+            if (pointOfInterestFromStore == null)
+            {
+                return NotFound();
+            }
+
+            city.PointOfInterest.Remove(pointOfInterestFromStore);
+            return NoContent();
+        }
     }
 
 }
