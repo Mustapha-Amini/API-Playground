@@ -40,6 +40,11 @@ namespace API_Playground.Controllers
         public ActionResult<PointOfInterestDto> CreatePointOfInterest( int CityId,
             PointOfInterestForCreationDto pointofinterst)
         {
+            if( !ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
             var city = CitiesDataStore.current.Cities.FirstOrDefault(c => c.CityDtoID ==  CityId);
             if(city == null)
             {
