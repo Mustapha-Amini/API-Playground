@@ -14,7 +14,8 @@ namespace API_Playground
             builder.Services.AddControllers(option =>
             {
                 option.ReturnHttpNotAcceptable=true;
-            }).AddXmlDataContractSerializerFormatters();
+            }).AddNewtonsoftJson()
+            .AddXmlDataContractSerializerFormatters();
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
