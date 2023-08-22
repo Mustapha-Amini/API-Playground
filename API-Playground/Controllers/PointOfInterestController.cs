@@ -19,7 +19,7 @@ namespace API_Playground.Controllers
             return Ok(city.PointsOfInterst);
         }
 
-        [HttpGet("{PointOfInterestID}" , Name ="GetPointOfInterest")]
+        [HttpGet("{pointofinterestid}" , Name ="GetPointOfInterest")]
         public ActionResult<PointOfInterestDto> GetPointOfInterest (int cityId, int pointofinterstId) {
 
             var city = CitiesDataStore.current.Cities.FirstOrDefault(c => c.CityDtoID == cityId);
@@ -68,6 +68,6 @@ namespace API_Playground.Controllers
                     finalPointOfInterst);
         }
 
-            
+        [HttpPut("{pointofinterestid}")]   
     }
 }
