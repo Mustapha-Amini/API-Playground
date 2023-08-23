@@ -18,14 +18,29 @@ namespace API_Playground.Controllers
 
         [HttpGet]
         public ActionResult<IEnumerable<PointOfInterestDto>> GetPointOfInterest(int cityId) 
-        { 
-            var city = CitiesDataStore.current.Cities.FirstOrDefault(c=>c.CityDtoID== cityId);
-            if (city == null)
+        {
+
+            try
             {
-                _logger.LogInformation($"City with id {cityId} wasn't found when accessing points of interest.");
-                return NotFound();
+                throw new Exception("Exception sample.");
+                var city = CitiesDataStore.current.Cities.FirstOrDefault(c => c.CityDtoID == cityId);
+                if (city == null)
+                {
+                    _logger.LogInformation($"City with id {cityId} wasn't found when accessing points of interest.");
+                    return NotFound();
+                }
+                return Ok(city.PointsOfInterst);
             }
-            return Ok(city.PointsOfInterst);
+            catch (Exception ex)
+            {
+                _logger.LogCritical(
+                    $"Exception while getting points of interest for city with id {cityId}.",
+                    ex);
+                return StatusCode(500, "A problem happened while handling your request.");
+            }
+            
+
+            
         }
 
         [HttpGet("{pointofinterestid}" , Name ="GetPointOfInterest")]
