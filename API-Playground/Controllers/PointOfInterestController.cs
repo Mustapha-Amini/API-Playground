@@ -9,12 +9,20 @@ namespace API_Playground.Controllers
     [ApiController]
     public class PointOfInterestController : ControllerBase
     {
+
+        private readonly ILogger<PointOfInterestController> _logger;
+        public PointOfInterestController(ILogger<PointOfInterestController> logger)
+        {
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+        }
+
         [HttpGet]
         public ActionResult<IEnumerable<PointOfInterestDto>> GetPointOfInterest(int cityId) 
         { 
             var city = CitiesDataStore.current.Cities.FirstOrDefault(c=>c.CityDtoID== cityId);
             if (city == null)
             {
+                _logger.LogInformation($"City with id {cityId} wasn't found when accessing points of interest.");
                 return NotFound();
             }
             return Ok(city.PointsOfInterst);
